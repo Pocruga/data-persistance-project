@@ -40,6 +40,7 @@ public class MainManager : MonoBehaviour
         }
 
         PlayerText.text = GameManager.Instance.PlayerName;
+        HighscoreText.text = GameManager.Instance.GetHighscoreText();
     }
 
     private void Update()
@@ -63,6 +64,10 @@ public class MainManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 
@@ -75,6 +80,7 @@ public class MainManager : MonoBehaviour
     public void GameOver()
     {
         m_GameOver = true;
+        GameManager.Instance.CheckAndPersistHighscore(m_Points);
         GameOverText.SetActive(true);
     }
 }
